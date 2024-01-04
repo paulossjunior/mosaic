@@ -1,18 +1,32 @@
 grammar Mosaic
 
+import 'helpers'
+import 'terminals'
+import 'general_information'
+
 entry Model:
-    (persons+=Person | greetings+=Greeting)*;
+   (general_information=GeneralInformation)?
+   (body+=Body)*
 
-Person:
-    'person' name=ID;
+;
 
-Greeting:
-    'Hello' person=[Person:ID] '!';
+Body:
+    Topic 
+;
 
-hidden terminal WS: /\s+/;
-terminal ID: /[_a-zA-Z][\w_]*/;
-terminal INT returns number: /[0-9]+/;
-terminal STRING: /"(\\.|[^"\\])*"|'(\\.|[^'\\])*'/;
-
-hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
-hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
+Topic:
+    'Topic' topic=STRING '{'
+        (
+        content=STRING
+        | tasks+=Tasks
+        )*
+    '}'
+;
+Tasks :
+    'Tasks' '{'
+        tasks+=Task
+    '}' 
+;
+Task: 
+    'Task' name=STRING (',' 'description' ':' description= STRING)? (',' 'stakeholder' ':' stakeholder=[Stakeholder:QualifiedName])? (',' 'deadline' ':' deadline= DATE)?
+;
