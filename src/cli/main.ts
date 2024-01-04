@@ -18,7 +18,7 @@ export const generateAction = async (fileName: string, opts: GenerateOptions): P
     const services = createMosaicServices(NodeFileSystem).Mosaic;
     const model = await extractAstNode<Model>(fileName, services);
     const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
-    console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
+    console.log(chalk.green(`code generated successfully: ${generatedFilePath}`));
 };
 
 export type GenerateOptions = {
@@ -35,7 +35,6 @@ export default function(): void {
         .command('generate')
         .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
         .option('-d, --destination <dir>', 'destination directory of generating')
-        .description('generates JavaScript code that prints "Hello, {name}!" for each greeting in a source file')
         .action(generateAction);
 
     program.parse(process.argv);
