@@ -16,17 +16,13 @@ Body:
 
 Topic:
     'Topic' topic=STRING '{'
-        (
-        content=STRING
-        | tasks+=Tasks
+        (content=STRING
+        | activities+=Activity
         )*
     '}'
 ;
-Tasks :
-    'Tasks' '{'
-        tasks+=Task
-    '}' 
-;
-Task: 
-    'Task' name=STRING (',' 'description' ':' description= STRING)? (',' 'stakeholder' ':' stakeholder=[Stakeholder:QualifiedName])? (',' 'deadline' ':' deadline= DATE)?
+
+Activity: 
+    'Activity' ':' name=STRING ('stakeholder'':' stakeholder=[Stakeholder:STRING])?  ( 'description' ':' description= STRING)? ('deadline' ':' deadline= DATE)?
+//    // (',' 'stakeholder' ':' stakeholder=[Stakeholder:QualifiedName])? 
 ;
