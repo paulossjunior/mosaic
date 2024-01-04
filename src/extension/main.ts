@@ -1,14 +1,36 @@
-import type { LanguageClientOptions, ServerOptions} from 'vscode-languageclient/node.js';
 import * as vscode from 'vscode';
 import * as path from 'node:path';
-import { LanguageClient, TransportKind } from 'vscode-languageclient/node.js';
+import {
+    LanguageClient, LanguageClientOptions, ServerOptions, TransportKind
+} from 'vscode-languageclient/node.js';
 
+
+import { generateAction } from '../cli/main.js';
 let client: LanguageClient;
+
+function registerGeneratorCommand(context: vscode.ExtensionContext): void {
+   
+    const callback = ()=>{
+        //Pega o nome do arquivo aberto no vscode
+        const filepath = vscode.window.activeTextEditor?.document.fileName
+   
+        if(filepath) {
+            //Aplicar o gerador sobre o arquivo
+            generateAction(filepath,{}).catch((reason) => vscode.window.showErrorMessage(reason.message))
+            vscode.window.showInformationMessage("Code generated successfully!")
+        }
+    }
+
+    context.subscriptions.push(vscode.commands.registerCommand("mosaic.generate",callback));
+        
+}
 
 // This function is called when the extension is activated.
 export function activate(context: vscode.ExtensionContext): void {
+    registerGeneratorCommand(context);
     client = startLanguageClient(context);
 }
+
 
 // This function is called when the extension is deactivated.
 export function deactivate(): Thenable<void> | undefined {

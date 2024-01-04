@@ -6,13 +6,7 @@ import { createMosaicServices } from '../language/mosaic-module.js';
 import { extractAstNode } from './cli-util.js';
 import { generateJavaScript } from './generator.js';
 import { NodeFileSystem } from 'langium/node';
-import * as url from 'node:url';
-import * as fs from 'node:fs/promises';
-import * as path from 'node:path';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const packagePath = path.resolve(__dirname, '..', '..', 'package.json');
-const packageContent = await fs.readFile(packagePath, 'utf-8');
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createMosaicServices(NodeFileSystem).Mosaic;
@@ -28,6 +22,26 @@ export type GenerateOptions = {
 export default function(): void {
     const program = new Command();
 
+    program
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        .version(require('../../package.json').version);
+
+    const fileExtensions = MosaicLanguageMetaData.fileExtensions.join(', ');
+    program
+        .command('generate')
+        .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
+        .option('-d, --destination <dir>', 'destination directory of generating')
+        .description('generates code')
+        .action(generateAction);
+
+    program.parse(process.argv);
+}
+
+
+/*
+export default function(): void {
+    const program = new Command();
+
     program.version(JSON.parse(packageContent).version);
 
     const fileExtensions = MosaicLanguageMetaData.fileExtensions.join(', ');
@@ -39,3 +53,4 @@ export default function(): void {
 
     program.parse(process.argv);
 }
+*/
