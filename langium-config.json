@@ -1,0 +1,15 @@
+{
+    "projectName": "Mosaic",
+    "languages": [{
+        "id": "mosaic",
+        "grammar": "src/language/mosaic.langium",
+        "fileExtensions": [".mosaic"],
+        "textMate": {
+            "out": "syntaxes/mosaic.tmLanguage.json"
+        },
+        "monarch": {
+            "out": "syntaxes/mosaic.monarch.ts"
+        }
+    }],
+    "out": "src/language/generated"
+}
