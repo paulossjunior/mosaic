@@ -1,5 +1,5 @@
 # Mosaic
-A Visual Studio Plugin that enable to create a documentation and task about a Meeting. 
+A Solution that allow to record and distribute data about a meeting. 
 
 ## Overview
 TODO 

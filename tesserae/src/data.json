@@ -1,0 +1,13 @@
+{
+    "title": "Meeting Review do Sprint 1 e Planning do Sprint 2 - 05/01/2024",
+    "resume": "Apresentação dos Prototipos do Sprint 1 e Planejamento do Sprint 2 para prototipos de alta fidelidade.",
+    "date":"05/01/2024",
+    "participantes":[
+        {"name":"Paulo Sergio","email": "paulossjunior@gmail.com"},
+        {"name":"Felipe","email": "felipe@gmail.com"}
+    ],
+    "topics": [
+        { "title": "topic 1", "content": "xxxxxxx", "duration":"30 minutes", "activities": [{"name": "Task 1", "description": "Description 1", "deadline": "20/01/2024"},{"name": "Task 2", "description": "Description 2", "deadline": "21/01/2024"}]},
+        { "title": "topic 2", "content": "YYYYYYYYY","duration":" 60 minutes" }
+    ]
+}

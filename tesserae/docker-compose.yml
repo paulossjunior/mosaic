@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  extract_gitlab:
+    container_name: etl_extract_gitlab
+    build: .
+    environment:
+      - WEBHOOK=${WEBHOOK}
+      - FOLDER=${}
+    env_file:
+    - .env
