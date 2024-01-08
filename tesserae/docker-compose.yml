@@ -6,5 +6,7 @@ services:
     environment:
       - WEBHOOK=${WEBHOOK}
       - FOLDER=${FOLDER}
+    volumes:
+      - ./meetings:/app/meetings/
     env_file:
     - .env
