@@ -24,7 +24,7 @@ class Publish():
     def __reading_json(self):
 
         json_data = None
-        file_path = 'data.json'
+        file_path = config('FOLDER')
 
         with open(file_path, 'r') as file:
             json_data = json.load(file)
